@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCDM Expert Survey | استبيان تقييم نماذج القرار متعدد المعايير</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,'Times New Roman','Noto Serif',serif;background:#faf9f7;color:#2c3e50;min-height:100vh;font-size:12.5px;line-height:1.75}
+.ar{font-family:Tahoma,'Noto Sans Arabic',sans-serif;direction:rtl;text-align:right}
+.sf{font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
+.wrap{max-width:700px;margin:0 auto;padding:16px 20px}
+
+/* Header */
+.hdr{text-align:center;padding:20px 0 14px;border-bottom:2px solid #2c3e50;margin-bottom:16px}
+.hdr-tag{font-size:10px;color:#7f8c8d;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.hdr h1{font-size:19px;font-weight:700;color:#1a252f;line-height:1.35;letter-spacing:-0.3px}
+.hdr h2{font-size:17px;font-weight:700;color:#34495e;font-family:Tahoma,'Noto Sans Arabic',sans-serif;direction:rtl;text-align:right;margin-top:3px;line-height:1.5}
+.hdr-sub{font-size:10.5px;color:#7f8c8d;margin-top:6px}
+
+/* Cards */
+.card{background:white;border-radius:4px;padding:28px 32px;margin-bottom:14px;border:1px solid #e5e0da}
+.card h2{font-size:15px;font-weight:700;color:#1a252f;margin-bottom:6px}
+.card .h2ar{font-size:14px;font-weight:700;color:#34495e;font-family:Tahoma,sans-serif;direction:rtl;text-align:right;margin-bottom:10px}
+
+/* Text */
+.pen{color:#34495e;line-height:1.75;margin-bottom:8px}
+.par{color:#4a5e6f;line-height:1.85;margin-bottom:8px;font-family:Tahoma,'Noto Sans Arabic',sans-serif;direction:rtl;text-align:right}
+
+/* Context boxes */
+.ctx{background:#f4f6f7;border-radius:3px;padding:16px;margin-bottom:16px;border:1px solid #e5e0da}
+.ctx-accent{border-left:3px solid #2c3e50}
+.ctx-warm{background:#fef9f0;border:1px solid #f0e0c8}
+.ctx-title{font-size:11px;font-weight:700;color:#5d6d7e;margin-bottom:6px;font-family:'Segoe UI',sans-serif;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Progress */
+.prog{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid #e5e0da}
+.prog-text{font-size:11px;color:#7f8c8d;font-weight:600;white-space:nowrap;font-family:'Segoe UI',sans-serif}
+.prog-track{flex:1;height:4px;border-radius:2px;background:#e5e0da}
+.prog-fill{height:100%;border-radius:2px;background:#2c3e50;transition:width 0.5s}
+
+/* Form */
+.lbl{font-size:11px;font-weight:600;color:#5d6d7e;display:block;margin-bottom:3px}
+.inp{width:100%;padding:8px 12px;border-radius:3px;border:1px solid #d5d0ca;font-size:12.5px;box-sizing:border-box;font-family:inherit}
+.inp-num{width:58px;text-align:center;padding:6px 4px;border-radius:3px;border:1px solid #d5d0ca;font-size:14px;font-weight:700;font-family:'Segoe UI',sans-serif}
+textarea.inp{min-height:70px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* Buttons */
+.btn-p{padding:10px 24px;border-radius:3px;border:none;color:white;font-weight:600;font-size:12px;cursor:pointer;background:#2c3e50;font-family:'Segoe UI',sans-serif}
+.btn-p:disabled{opacity:0.4;cursor:not-allowed}
+.btn-s{padding:8px 18px;border-radius:3px;border:1px solid #d5d0ca;background:white;color:#5d6d7e;font-weight:600;font-size:11px;cursor:pointer;font-family:'Segoe UI',sans-serif}
+.btn-g{background:#1e8449}
+.btn-full{width:100%}
+.btn-row{display:flex;gap:10px}
+
+/* Weights */
+.wt-box{border-radius:3px;padding:16px;margin-bottom:16px;border:1px solid}
+.wt-ok{background:#eafaf1;border-color:#abebc6}
+.wt-bad{background:#fdedec;border-color:#f5b7b1}
+.wt-item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.wt-total{margin-top:8px;font-size:12px;font-weight:700;text-align:center;font-family:'Segoe UI',sans-serif}
+
+/* Num badge */
+.num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#2c3e50;color:white;font-size:11px;font-weight:700;font-family:'Segoe UI',sans-serif;flex-shrink:0}
+.num-sm{width:18px;height:18px;font-size:9px;background:#5d6d7e}
+
+/* Method cards */
+.mc{margin-bottom:12px;border:1px solid #e5e0da;border-radius:4px;background:white;overflow:hidden;transition:border-color 0.3s}
+.mc.open{border-color:var(--mc,#2c3e50)}
+.mc-hdr{width:100%;padding:14px 20px;display:flex;align-items:center;gap:12px;background:white;border:none;cursor:pointer;text-align:left}
+.mc.open .mc-hdr{background:#faf9f7}
+.mc-name{font-size:13px;font-weight:700;color:#1a252f}
+.mc-name-ar{font-size:12px;font-weight:600;color:#5d6d7e;font-family:Tahoma,sans-serif;direction:rtl;margin-top:2px}
+.mc-arrow{font-size:14px;color:#95a5a6;transition:transform 0.3s;margin-left:auto}
+.mc.open .mc-arrow{transform:rotate(180deg)}
+.mc-body{padding:0 20px 20px;display:none}
+.mc.open .mc-body{display:block}
+
+/* Analogy box */
+.analogy{border-left:3px solid var(--mc,#2c3e50);padding-left:16px;margin-bottom:18px}
+.analogy-tag{font-size:11px;font-weight:700;color:var(--mc,#2c3e50);margin-bottom:4px;font-family:'Segoe UI',sans-serif;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Visual */
+.vis{background:#faf9f7;border-radius:3px;padding:12px;margin-bottom:18px;border:1px solid #e5e0da}
+
+/* Steps */
+.steps-tag{font-size:11px;font-weight:700;color:#5d6d7e;margin-bottom:6px;font-family:'Segoe UI',sans-serif;text-transform:uppercase;letter-spacing:0.5px}
+.step{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.step-en{font-size:12px;color:#2c3e50;line-height:1.55}
+.step-ar{font-size:12px;color:#5d6d7e;line-height:1.65;font-family:Tahoma,sans-serif;direction:rtl;text-align:right;margin-top:2px}
+
+/* Formula */
+.formula-box{background:#f4f6f7;border-radius:3px;padding:14px;margin-bottom:14px;border:1px solid #e5e0da}
+.formula-tag{font-size:10px;font-weight:700;color:#5d6d7e;margin-bottom:3px;font-family:'Segoe UI',sans-serif;text-transform:uppercase;letter-spacing:0.5px}
+.formula-code{font-size:13px;color:#1a252f;font-weight:600;font-family:'Courier New',monospace}
+.formula-ex{font-size:10.5px;color:#5d6d7e;margin-top:4px;line-height:1.5}
+
+/* Example */
+.ex-box{background:#fef9f0;border-radius:3px;padding:14px;margin-bottom:14px;border:1px solid #f0e0c8}
+.ex-tag{font-size:10px;font-weight:700;color:#b9770e;margin-bottom:3px;font-family:'Segoe UI',sans-serif;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Strengths/Weaknesses */
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.sw-col{padding-top:8px}
+.sw-s{border-top:2px solid #1e8449}
+.sw-w{border-top:2px solid #922b21}
+.sw-tag{font-size:10px;font-weight:700;margin-bottom:5px;font-family:'Segoe UI',sans-serif;text-transform:uppercase}
+.sw-tag-s{color:#1e8449}
+.sw-tag-w{color:#922b21}
+.sw-item{margin-bottom:5px}
+.sw-en-s{font-size:11px;color:#1e8449;line-height:1.45}
+.sw-ar-s{font-size:10.5px;color:#27ae60;font-family:Tahoma,sans-serif;direction:rtl;text-align:right;line-height:1.5}
+.sw-en-w{font-size:11px;color:#922b21;line-height:1.45}
+.sw-ar-w{font-size:10.5px;color:#c0392b;font-family:Tahoma,sans-serif;direction:rtl;text-align:right;line-height:1.5}
+
+/* Rating section */
+.rate-sec{background:#faf9f7;border-radius:3px;padding:18px;border:1px solid #e5e0da}
+.rate-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.rate-sub{font-size:11px;color:#7f8c8d;margin-bottom:14px;font-family:'Segoe UI',sans-serif}
+.kpi-block{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #e5e0da}
+.kpi-hdr{display:flex;align-items:baseline;gap:6px;margin-bottom:3px}
+.kpi-name{font-size:12.5px;font-weight:700;color:#1a252f}
+.kpi-name-ar{font-size:11.5px;font-weight:600;color:#7f8c8d;font-family:Tahoma,sans-serif}
+.kpi-q{font-size:11.5px;color:#34495e;margin-left:26px;line-height:1.5}
+.kpi-q-ar{font-size:11.5px;color:#5d6d7e;direction:rtl;text-align:right;line-height:1.6;font-family:Tahoma,sans-serif;margin-bottom:2px}
+.kpi-h{font-size:10px;color:#95a5a6;margin-left:26px;font-style:italic}
+.kpi-h-ar{font-size:10px;color:#aab7b8;font-style:italic;direction:rtl;text-align:right;font-family:Tahoma,sans-serif}
+
+/* Rating buttons */
+.rbtns{display:flex;gap:3px;flex-wrap:wrap;margin:8px 0 14px}
+.rbtn{min-width:42px;padding:6px 3px;border-radius:3px;border:1px solid #d5d0ca;background:white;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;transition:all 0.15s;font-family:'Segoe UI',sans-serif}
+.rbtn.active{border-width:2px}
+.rbtn-num{font-size:15px;font-weight:700;line-height:1;color:#7f8c8d}
+.rbtn.active .rbtn-num{color:var(--rc)}
+.rbtn-lbl{font-size:7px;line-height:1.1;color:#95a5a6}
+.rbtn.active .rbtn-lbl{color:var(--rc)}
+
+/* Review table */
+.rtable{width:100%;border-collapse:collapse;font-size:11px;font-family:'Segoe UI',sans-serif}
+.rtable th{padding:8px 5px;color:#5d6d7e;font-weight:700;border-bottom:2px solid #2c3e50}
+.rtable td{padding:8px 5px;border-bottom:1px solid #e5e0da}
+
+/* Bars */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.bar-lbl{width:75px;text-align:right;font-size:11px;font-weight:700;font-family:'Segoe UI',sans-serif}
+.bar-track{flex:1;height:20px;border-radius:2px;background:#f4f6f7;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;transition:width 0.5s}
+.bar-val{font-size:9px;font-weight:700;color:white;font-family:'Segoe UI',sans-serif}
+
+/* Ranking */
+.rank-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.rank-pos{font-size:9px;text-align:center;color:#95a5a6;font-weight:700;margin-bottom:2px;font-family:'Segoe UI',sans-serif}
+.rank-sel{width:100%;padding:6px 2px;border-radius:3px;border:1px solid #d5d0ca;font-size:10px;text-align:center;font-family:'Segoe UI',sans-serif}
+
+/* Warning */
+.warn{background:#fdedec;border-radius:3px;padding:12px;margin-bottom:12px;border:1px solid #f5b7b1}
+.warn-en{font-size:11px;color:#922b21;font-weight:600;font-family:'Segoe UI',sans-serif}
+.warn-ar{font-size:10.5px;color:#c0392b;font-family:Tahoma,sans-serif;direction:rtl;text-align:right;margin-top:3px}
+
+/* Done */
+.done{text-align:center}
+.done-icon{font-size:42px;color:#1e8449;margin-bottom:10px}
+
+/* Footer */
+.ftr{text-align:center;font-size:9px;color:#bdc3c7;padding:20px 0;font-family:'Segoe UI',sans-serif;border-top:1px solid #e5e0da;margin-top:8px}
+
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="hdr-tag sf">Research Instrument / أداة بحثية</div>
+    <h1>Expert Survey: Evaluating MCDM Methods for the Bid Ranking Stage</h1>
+    <h2>استبيان تقييم نماذج القرار متعدد المعايير لمرحلة ترتيب العطاءات في المشتريات العامة</h2>
+    <div class="hdr-sub sf">A Research Instrument for Master's Thesis — Sultanate of Oman</div>
+    <div class="hdr-sub" style="font-family:Tahoma,sans-serif;direction:rtl">أداة بحثية لرسالة ماجستير — سلطنة عُمان</div>
+  </div>
+  <div id="app"></div>
+  <div class="ftr">MCDM Expert Survey — Master's Thesis Research Instrument — Sultanate of Oman<br><span style="font-family:Tahoma,sans-serif">استبيان خبراء MCDM — أداة بحثية لرسالة ماجستير — سلطنة عُمان</span></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════
+const M=[
+{id:"SAW",num:"1",ne:"SAW — Simple Additive Weighting",na:"SAW — طريقة الجمع البسيط للأوزان",c:"#1a5276",
+ae:"Think of a school report card. Each subject has a weight (importance). Math = 40%, Science = 30%, English = 30%. You multiply each grade by its weight, then add them all together. The student with the highest total is ranked first. SAW works the same way for ranking bidders.",
+aa:"تخيّلها مثل كشف درجات المدرسة. كل مادة لها وزن (أهمية): الرياضيات = 40%، العلوم = 30%، الإنجليزي = 30%. تضرب كل درجة في وزنها، ثم تجمع الكل. الطالب صاحب أعلى مجموع يحتل المرتبة الأولى. طريقة SAW تعمل بنفس الأسلوب لترتيب مقدمي العطاءات.",
+he:["Assign a weight (importance percentage) to each evaluation criterion.","Normalize all bidder scores to a common 0–1 scale.","Multiply each normalized score by its criterion weight.","Sum all weighted scores. The highest total determines the top-ranked bidder."],
+ha:["حدد وزناً (نسبة أهمية) لكل معيار تقييم.","طبّع جميع درجات مقدمي العطاءات إلى مقياس موحد 0–1.","اضرب كل درجة مطبّعة في وزن معيارها.","اجمع كل الدرجات الموزونة. أعلى مجموع يحدد مقدم العطاء الأعلى ترتيباً."],
+f:"V(i) = Σ wⱼ · rᵢⱼ",fe:"where wⱼ = weight of criterion j, rᵢⱼ = normalized score of bidder i on criterion j",fa:"حيث wⱼ = وزن المعيار j، و rᵢⱼ = الدرجة المطبّعة لمقدم العطاء i على المعيار j",
+xe:"If Cost weight = 40% and Bidder A's cost score = 0.80, then: 0.80 × 0.40 = 0.32 for that criterion alone.",xa:"إذا كان وزن التكلفة = 40% ودرجة مقدم العطاء أ في التكلفة = 0.80، فإن: 0.80 × 0.40 = 0.32 لهذا المعيار وحده.",
+ge:["Highly transparent — every step can be traced and explained","Minimal computational requirements (Excel-friendly)","Widely understood by non-technical stakeholders"],
+ga:["شفافية عالية — كل خطوة يمكن تتبعها وشرحها","متطلبات حسابية بسيطة (مناسبة للإكسل)","مفهومة على نطاق واسع من غير المتخصصين"],
+be:["Assumes criteria are independent of each other","Sensitive to the normalization method chosen","May oversimplify complex trade-offs between criteria"],
+ba:["تفترض استقلالية المعايير عن بعضها","حساسة لطريقة التطبيع المختارة","قد تبسّط المفاضلات المعقدة بين المعايير بشكل مفرط"],
+svg:`<svg viewBox="0 0 480 170" style="width:100%;max-height:170px"><text x="240" y="14" text-anchor="middle" font-size="9" fill="#5d6d7e" font-style="italic">Figure 1: SAW — Stacked weighted scores per bidder</text><g><text x="5" y="45" font-size="9" fill="#2c3e50" font-weight="600">Bidder A</text><text x="5" y="55" font-size="8" fill="#7f8c8d" font-family="Tahoma,sans-serif">مقدم العطاء أ</text><rect x="155" y="34" width="110" height="24" fill="#2c3e50" rx="3" opacity="0.75"/><rect x="265" y="34" width="80" height="24" fill="#5d6d7e" opacity="0.83"/><rect x="345" y="34" width="55" height="24" fill="#95a5a6" opacity="0.91"/><text x="408" y="50" font-size="11" fill="#2c3e50" font-weight="700">= 7.85</text><text x="458" y="50" font-size="9" fill="#1a5276" font-weight="600">← Rank 1</text></g><g><text x="5" y="90" font-size="9" fill="#2c3e50" font-weight="600">Bidder B</text><text x="5" y="100" font-size="8" fill="#7f8c8d" font-family="Tahoma,sans-serif">مقدم العطاء ب</text><rect x="155" y="79" width="75" height="24" fill="#2c3e50" rx="3" opacity="0.75"/><rect x="230" y="79" width="100" height="24" fill="#5d6d7e" opacity="0.83"/><rect x="330" y="79" width="50" height="24" fill="#95a5a6" opacity="0.91"/><text x="388" y="95" font-size="11" fill="#2c3e50" font-weight="700">= 6.90</text></g><g><text x="5" y="135" font-size="9" fill="#2c3e50" font-weight="600">Bidder C</text><text x="5" y="145" font-size="8" fill="#7f8c8d" font-family="Tahoma,sans-serif">مقدم العطاء ج</text><rect x="155" y="124" width="90" height="24" fill="#2c3e50" rx="3" opacity="0.75"/><rect x="245" y="124" width="70" height="24" fill="#5d6d7e" opacity="0.83"/><rect x="315" y="124" width="65" height="24" fill="#95a5a6" opacity="0.91"/><text x="388" y="140" font-size="11" fill="#2c3e50" font-weight="700">= 7.10</text></g><g transform="translate(155,165)"><rect width="10" height="10" fill="#2c3e50" rx="1"/><text x="14" y="9" font-size="8" fill="#5d6d7e">Cost (40%)</text><g transform="translate(105,0)"><rect width="10" height="10" fill="#5d6d7e" rx="1"/><text x="14" y="9" font-size="8" fill="#5d6d7e">Quality (35%)</text></g><g transform="translate(215,0)"><rect width="10" height="10" fill="#95a5a6" rx="1"/><text x="14" y="9" font-size="8" fill="#5d6d7e">Time (25%)</text></g></g></svg>`},
+{id:"AHP",num:"2",ne:"AHP — Analytic Hierarchy Process",na:"AHP — عملية التحليل الهرمي",c:"#6c3483",
+ae:"Instead of assigning weights directly, AHP asks you to compare criteria two at a time: \"Is cost more important than quality? By how much?\" This is like choosing a restaurant with colleagues — you compare price vs. food quality, price vs. location, and food quality vs. location. From these pairwise judgments, AHP mathematically derives consistent weights.",
+aa:"بدلاً من تحديد الأوزان مباشرة، تطلب منك AHP مقارنة المعايير اثنين في كل مرة: \"هل التكلفة أهم من الجودة؟ بكم؟\" هذا يشبه اختيار مطعم مع زملائك — تقارن السعر مع جودة الطعام، السعر مع الموقع، وجودة الطعام مع الموقع. من هذه المقارنات الثنائية، تستخلص AHP أوزاناً متسقة رياضياً.",
+he:["Structure the decision as a hierarchy: Goal → Criteria → Bidders.","Compare every pair of criteria: \"Which is more important, and by how much?\" using a 1–9 scale.","Build a pairwise comparison matrix and compute priority weights via eigenvector calculation.","Check consistency (CR < 0.10 confirms logical judgments).","Apply derived weights to evaluate and rank bidders."],
+ha:["هيكل القرار كتسلسل هرمي: الهدف ← المعايير ← مقدمو العطاءات.","قارن كل زوج من المعايير: \"أيهما أهم وبكم؟\" باستخدام مقياس 1–9.","ابنِ مصفوفة المقارنات الثنائية واحسب أوزان الأولوية عبر حساب المتجه الذاتي.","تحقق من الاتساق (CR < 0.10 يؤكد منطقية الأحكام).","طبّق الأوزان المستخلصة لتقييم وترتيب مقدمي العطاءات."],
+f:"Aw = λmax · w",fe:"where A = pairwise comparison matrix, w = priority weight vector, λmax = largest eigenvalue",fa:"حيث A = مصفوفة المقارنات الثنائية، w = متجه أوزان الأولوية، λmax = أكبر قيمة ذاتية",
+xe:"Comparing Cost vs. Quality: a value of 3 means \"Cost is moderately more important than Quality.\"",xa:"مقارنة التكلفة مع الجودة: القيمة 3 تعني \"التكلفة أكثر أهمية بشكل متوسط من الجودة.\"",
+ge:["Built-in consistency ratio detects contradictory judgments","Natural cognitive process — humans compare two items intuitively","Accommodates both quantitative and qualitative criteria"],
+ga:["نسبة الاتساق المدمجة تكشف الأحكام المتناقضة","عملية إدراكية طبيعية — البشر يقارنون بين عنصرين بشكل حدسي","تستوعب المعايير الكمية والنوعية"],
+be:["Number of pairwise comparisons grows rapidly with more criteria","Rank reversal may occur when alternatives are added or removed","Requires facilitation expertise for group decision-making"],
+ba:["عدد المقارنات الثنائية يتزايد بسرعة مع زيادة المعايير","قد يحدث انعكاس في الترتيب عند إضافة أو إزالة بدائل","تتطلب خبرة في التيسير لاتخاذ القرارات الجماعية"],
+svg:`<svg viewBox="0 0 440 210" style="width:100%;max-height:210px"><text x="220" y="14" text-anchor="middle" font-size="9" fill="#5d6d7e" font-style="italic">Figure 2: AHP — Hierarchy with pairwise comparison matrix</text><rect x="160" y="22" width="120" height="26" rx="4" fill="#6c3483" opacity="0.85"/><text x="220" y="39" text-anchor="middle" font-size="9" fill="white" font-weight="600">Goal: Best Bidder</text><line x1="220" y1="48" x2="70" y2="66" stroke="#6c3483" stroke-width="1.2" opacity="0.35"/><line x1="220" y1="48" x2="220" y2="66" stroke="#6c3483" stroke-width="1.2" opacity="0.35"/><line x1="220" y1="48" x2="370" y2="66" stroke="#6c3483" stroke-width="1.2" opacity="0.35"/><rect x="20" y="66" width="100" height="26" rx="4" fill="#6c3483" opacity="0.6"/><text x="70" y="82" text-anchor="middle" font-size="8" fill="white">Cost / التكلفة</text><text x="70" y="104" text-anchor="middle" font-size="8" fill="#6c3483" font-weight="700">w = 0.54</text><rect x="170" y="66" width="100" height="26" rx="4" fill="#6c3483" opacity="0.6"/><text x="220" y="82" text-anchor="middle" font-size="8" fill="white">Quality / الجودة</text><text x="220" y="104" text-anchor="middle" font-size="8" fill="#6c3483" font-weight="700">w = 0.30</text><rect x="320" y="66" width="100" height="26" rx="4" fill="#6c3483" opacity="0.6"/><text x="370" y="82" text-anchor="middle" font-size="8" fill="white">Time / الوقت</text><text x="370" y="104" text-anchor="middle" font-size="8" fill="#6c3483" font-weight="700">w = 0.16</text><rect x="90" y="115" width="260" height="88" rx="4" fill="#f8f4fc" stroke="#6c3483" stroke-width="0.8" opacity="0.7"/><text x="220" y="128" text-anchor="middle" font-size="8" fill="#6c3483" font-weight="700">Pairwise Comparison Matrix</text><text x="180" y="143" text-anchor="middle" font-size="7.5" fill="#6c3483" font-weight="600">Cost</text><text x="240" y="143" text-anchor="middle" font-size="7.5" fill="#6c3483" font-weight="600">Quality</text><text x="300" y="143" text-anchor="middle" font-size="7.5" fill="#6c3483" font-weight="600">Time</text><text x="120" y="157" text-anchor="middle" font-size="8" fill="#6c3483" font-weight="600">Cost</text><text x="180" y="157" text-anchor="middle" font-size="8" fill="#2c3e50">1</text><text x="240" y="157" text-anchor="middle" font-size="8" fill="#2c3e50">3</text><text x="300" y="157" text-anchor="middle" font-size="8" fill="#2c3e50">5</text><text x="120" y="171" text-anchor="middle" font-size="8" fill="#6c3483" font-weight="600">Quality</text><text x="180" y="171" text-anchor="middle" font-size="8" fill="#2c3e50">1/3</text><text x="240" y="171" text-anchor="middle" font-size="8" fill="#2c3e50">1</text><text x="300" y="171" text-anchor="middle" font-size="8" fill="#2c3e50">3</text><text x="120" y="185" text-anchor="middle" font-size="8" fill="#6c3483" font-weight="600">Time</text><text x="180" y="185" text-anchor="middle" font-size="8" fill="#2c3e50">1/5</text><text x="240" y="185" text-anchor="middle" font-size="8" fill="#2c3e50">1/3</text><text x="300" y="185" text-anchor="middle" font-size="8" fill="#2c3e50">1</text><text x="220" y="206" text-anchor="middle" font-size="7.5" fill="#7f8c8d" font-style="italic">CR = 0.037 &lt; 0.10 ✓ Consistent</text></svg>`},
+{id:"TOPSIS",num:"3",ne:"TOPSIS — Technique for Order Preference by Similarity to Ideal Solution",na:"TOPSIS — تقنية ترتيب التفضيل بالتشابه مع الحل المثالي",c:"#117a65",
+ae:"Imagine choosing a house. The ideal house has the lowest price, best location, and largest space. The worst possible house has the highest price, worst location, and smallest space. TOPSIS measures how close each real house is to the ideal, and how far it is from the worst. The best choice is the one closest to ideal and farthest from worst — like finding the best spot on a map between two points.",
+aa:"تخيّل أنك تختار منزلاً. المنزل المثالي: أقل سعر، أفضل موقع، أكبر مساحة. أسوأ منزل ممكن: أعلى سعر، أسوأ موقع، أصغر مساحة. تقيس TOPSIS مدى قرب كل منزل حقيقي من المثالي، ومدى بُعده عن الأسوأ. أفضل خيار هو الأقرب للمثالي والأبعد عن الأسوأ.",
+he:["Construct a normalized weighted decision matrix.","Determine the Ideal Best solution (best value in each criterion).","Determine the Ideal Worst solution (worst value in each criterion).","Calculate each bidder's Euclidean distance to both Ideal Best and Ideal Worst.","Compute the closeness coefficient. The highest value identifies the best-ranked bidder."],
+ha:["أنشئ مصفوفة القرار المطبّعة والموزونة.","حدد الحل المثالي الأفضل (أفضل قيمة في كل معيار).","حدد الحل المثالي الأسوأ (أسوأ قيمة في كل معيار).","احسب المسافة الإقليدية لكل مقدم عطاء من الحل الأفضل والأسوأ.","احسب معامل القرب. أعلى قيمة تحدد مقدم العطاء الأعلى ترتيباً."],
+f:"Cᵢ* = dᵢ⁻ / (dᵢ⁺ + dᵢ⁻)",fe:"where dᵢ⁺ = distance to ideal best, dᵢ⁻ = distance to ideal worst, Cᵢ* ∈ [0, 1]",fa:"حيث dᵢ⁺ = المسافة من الحل المثالي الأفضل، dᵢ⁻ = المسافة من الحل المثالي الأسوأ",
+xe:"Bidder A: distance to Best = 2, distance to Worst = 5 → C* = 5 ÷ (2+5) = 0.714",xa:"مقدم العطاء أ: المسافة من الأفضل = 2، المسافة من الأسوأ = 5 ← C* = 5 ÷ (2+5) = 0.714",
+ge:["Simultaneously considers proximity to best and distance from worst","Geometric logic is intuitive (distance-based)","Well-suited for quantitative multi-criteria problems"],ga:["تأخذ بالاعتبار القرب من الأفضل والبعد عن الأسوأ في آن واحد","المنطق الهندسي حدسي (قائم على المسافة)","مناسبة جداً للمسائل الكمية متعددة المعايير"],
+be:["Euclidean distance assumes criteria independence","Results vary with different normalization approaches","Does not include a consistency verification mechanism"],ba:["المسافة الإقليدية تفترض استقلالية المعايير","النتائج تتغير مع اختلاف أساليب التطبيع","لا تتضمن آلية للتحقق من الاتساق"],
+svg:`<svg viewBox="0 0 440 200" style="width:100%;max-height:200px"><text x="220" y="14" text-anchor="middle" font-size="9" fill="#5d6d7e" font-style="italic">Figure 3: TOPSIS — Distance to Ideal Best and Ideal Worst</text><line x1="55" y1="175" x2="400" y2="175" stroke="#bdc3c7" stroke-width="0.8"/><line x1="55" y1="175" x2="55" y2="22" stroke="#bdc3c7" stroke-width="0.8"/><text x="228" y="192" text-anchor="middle" font-size="8" fill="#7f8c8d">Criterion 1 (weighted normalized) →</text><text x="18" y="100" text-anchor="middle" font-size="8" fill="#7f8c8d" transform="rotate(-90,18,100)">Criterion 2 →</text><circle cx="350" cy="35" r="8" fill="#117a65" opacity="0.15"/><circle cx="350" cy="35" r="4" fill="#117a65"/><text x="350" y="27" text-anchor="middle" font-size="8" fill="#117a65" font-weight="700">A⁺ Ideal Best</text><text x="350" y="49" text-anchor="middle" font-size="7" fill="#117a65" font-family="Tahoma,sans-serif">الحل المثالي الأفضل</text><circle cx="85" cy="155" r="8" fill="#922b21" opacity="0.15"/><circle cx="85" cy="155" r="4" fill="#922b21"/><text x="85" y="147" text-anchor="middle" font-size="8" fill="#922b21" font-weight="700">A⁻ Ideal Worst</text><text x="85" y="168" text-anchor="middle" font-size="7" fill="#922b21" font-family="Tahoma,sans-serif">الحل الأسوأ</text><line x1="300" y1="55" x2="350" y2="35" stroke="#117a65" stroke-dasharray="4,3" stroke-width="0.8" opacity="0.4"/><line x1="300" y1="55" x2="85" y2="155" stroke="#922b21" stroke-dasharray="4,3" stroke-width="0.8" opacity="0.4"/><circle cx="300" cy="55" r="14" fill="#2c3e50" opacity="0.85"/><text x="300" y="58" text-anchor="middle" font-size="9" fill="white" font-weight="600">A</text><text x="320" y="51" font-size="8" fill="#2c3e50">C*=0.82</text><text x="320" y="62" font-size="7" fill="#7f8c8d">Rank: 1st</text><line x1="210" y1="100" x2="350" y2="35" stroke="#117a65" stroke-dasharray="4,3" stroke-width="0.8" opacity="0.4"/><line x1="210" y1="100" x2="85" y2="155" stroke="#922b21" stroke-dasharray="4,3" stroke-width="0.8" opacity="0.4"/><circle cx="210" cy="100" r="14" fill="#2c3e50" opacity="0.85"/><text x="210" y="103" text-anchor="middle" font-size="9" fill="white" font-weight="600">B</text><text x="230" y="96" font-size="8" fill="#2c3e50">C*=0.51</text><line x1="130" y1="140" x2="350" y2="35" stroke="#117a65" stroke-dasharray="4,3" stroke-width="0.8" opacity="0.4"/><line x1="130" y1="140" x2="85" y2="155" stroke="#922b21" stroke-dasharray="4,3" stroke-width="0.8" opacity="0.4"/><circle cx="130" cy="140" r="14" fill="#2c3e50" opacity="0.85"/><text x="130" y="143" text-anchor="middle" font-size="9" fill="white" font-weight="600">C</text><text x="150" y="136" font-size="8" fill="#2c3e50">C*=0.24</text></svg>`},
+{id:"PROMETHEE",num:"4",ne:"PROMETHEE — Preference Ranking Organisation Method",na:"PROMETHEE — طريقة الترتيب التفضيلي لتنظيم التقييم الإثرائي",c:"#922b21",
+ae:"Think of a football league table. Each bidder \"plays\" against every other bidder on each criterion. When Bidder A outperforms B on cost, A earns a preference point. When B outperforms A on quality, B earns a point. After all matchups, the bidder with the highest net score (total wins minus total losses) is ranked first.",
+aa:"تخيّلها مثل جدول ترتيب دوري كرة القدم. كل مقدم عطاء \"يلعب\" ضد كل مقدم عطاء آخر على كل معيار. عندما يتفوق مقدم العطاء أ على ب في التكلفة، يحصل أ على نقطة تفضيل. عندما يتفوق ب على أ في الجودة، يحصل ب على نقطة. بعد كل المواجهات، مقدم العطاء صاحب أعلى صافي نقاط يحتل المرتبة الأولى.",
+he:["Define a preference function for each criterion.","Compare every pair of bidders on every criterion.","Calculate positive flow Φ⁺ (outgoing strength) and negative flow Φ⁻ (incoming weakness).","Net flow Φ = Φ⁺ − Φ⁻. Rank bidders by net flow."],
+ha:["حدد دالة تفضيل لكل معيار.","قارن كل زوج من مقدمي العطاءات على كل معيار.","احسب التدفق الإيجابي Φ⁺ (القوة الصادرة) والتدفق السلبي Φ⁻ (الضعف الوارد).","صافي التدفق Φ = Φ⁺ − Φ⁻. رتّب مقدمي العطاءات حسب صافي التدفق."],
+f:"Φ(a) = Φ⁺(a) − Φ⁻(a)",fe:"Φ⁺ = leaving flow (how much a outranks others), Φ⁻ = entering flow (how much others outrank a)",fa:"Φ⁺ = التدفق الصادر (مقدار تفوق a على الآخرين)، Φ⁻ = التدفق الوارد (مقدار تفوق الآخرين على a)",
+xe:"Bidder A: Φ⁺ = 0.8, Φ⁻ = 0.2 → Net flow = +0.6 (strong outranking position)",xa:"مقدم العطاء أ: Φ⁺ = 0.8، Φ⁻ = 0.2 ← صافي التدفق = +0.6 (موقع تفوق قوي)",
+ge:["Flexible preference functions accommodate different criterion types","Can identify incomparability between alternatives","Rich visual analysis capabilities (GAIA plane)"],ga:["دوال التفضيل المرنة تستوعب أنواع مختلفة من المعايير","يمكنها تحديد عدم القابلية للمقارنة بين البدائل","قدرات تحليل بصري غنية"],
+be:["Requires expert knowledge to configure preference functions","More difficult to explain to non-technical stakeholders","Computational effort increases significantly with many alternatives"],ba:["تتطلب معرفة خبيرة لإعداد دوال التفضيل","أصعب في الشرح لأصحاب المصلحة غير التقنيين","التعقيد الحسابي يزداد بشكل ملحوظ مع كثرة البدائل"],
+svg:`<svg viewBox="0 0 440 160" style="width:100%;max-height:160px"><text x="220" y="14" text-anchor="middle" font-size="9" fill="#5d6d7e" font-style="italic">Figure 4: PROMETHEE — Net outranking flows</text><defs><marker id="arrP" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6Z" fill="#5d6d7e"/></marker></defs><circle cx="90" cy="70" r="26" fill="#1e8449" opacity="0.1"/><circle cx="90" cy="70" r="20" fill="#1e8449" opacity="0.75"/><text x="90" y="67" text-anchor="middle" font-size="9" fill="white" font-weight="600">A / أ</text><text x="90" y="79" text-anchor="middle" font-size="8" fill="white" opacity="0.9">+0.60</text><text x="90" y="108" text-anchor="middle" font-size="8" fill="#1e8449" font-weight="600">1st</text><circle cx="220" cy="70" r="26" fill="#b7950b" opacity="0.1"/><circle cx="220" cy="70" r="20" fill="#b7950b" opacity="0.75"/><text x="220" y="67" text-anchor="middle" font-size="9" fill="white" font-weight="600">B / ب</text><text x="220" y="79" text-anchor="middle" font-size="8" fill="white" opacity="0.9">+0.10</text><text x="220" y="108" text-anchor="middle" font-size="8" fill="#b7950b" font-weight="600">2nd</text><circle cx="350" cy="70" r="26" fill="#922b21" opacity="0.1"/><circle cx="350" cy="70" r="20" fill="#922b21" opacity="0.75"/><text x="350" y="67" text-anchor="middle" font-size="9" fill="white" font-weight="600">C / ج</text><text x="350" y="79" text-anchor="middle" font-size="8" fill="white" opacity="0.9">−0.70</text><text x="350" y="108" text-anchor="middle" font-size="8" fill="#922b21" font-weight="600">3rd</text><line x1="110" y1="62" x2="198" y2="62" stroke="#1e8449" stroke-width="2" opacity="0.5" marker-end="url(#arrP)"/><line x1="240" y1="62" x2="328" y2="62" stroke="#b7950b" stroke-width="1.5" opacity="0.4" marker-end="url(#arrP)"/><text x="220" y="145" text-anchor="middle" font-size="8" fill="#7f8c8d" font-style="italic">Φ(a) = Φ⁺(a) − Φ⁻(a)</text><text x="220" y="156" text-anchor="middle" font-size="7" fill="#95a5a6" font-family="Tahoma,sans-serif">صافي التدفق الأعلى = موقع تفوق أقوى</text></svg>`},
+{id:"MAUT",num:"5",ne:"MAUT — Multi-Attribute Utility Theory",na:"MAUT — نظرية المنفعة متعددة السمات",c:"#b9770e",
+ae:"Consider your phone battery. Dropping from 100% to 90% is barely noticeable. Dropping from 10% to 0% causes alarm. The same 10% change has a very different psychological impact depending on where you start. MAUT captures this through utility functions — mathematical curves that convert raw scores into \"satisfaction values\" reflecting how humans actually perceive differences in performance.",
+aa:"فكّر في بطارية هاتفك. الانخفاض من 100% إلى 90% بالكاد يُلاحظ. الانخفاض من 10% إلى 0% يسبب قلقاً. نفس التغيير بنسبة 10% له تأثير نفسي مختلف تماماً حسب نقطة البداية. تلتقط MAUT هذا من خلال دوال المنفعة — منحنيات رياضية تحوّل الدرجات الخام إلى \"قيم رضا\" تعكس كيف يدرك البشر فعلياً الفروقات في الأداء.",
+he:["Define a utility function for each criterion (linear, concave, convex, or S-shaped).","Convert all raw performance scores into utility values on a 0–1 scale.","Assign weights to each criterion reflecting its relative importance.","Calculate total utility as the weighted sum. Highest = best-ranked bidder."],
+ha:["حدد دالة منفعة لكل معيار (خطية، مقعّرة، محدّبة، أو على شكل S).","حوّل جميع درجات الأداء الخام إلى قيم منفعة على مقياس 0–1.","حدد أوزاناً لكل معيار تعكس أهميته النسبية.","احسب المنفعة الإجمالية كمجموع موزون. الأعلى = مقدم العطاء الأفضل ترتيباً."],
+f:"U(x) = Σ wᵢ · uᵢ(xᵢ)",fe:"uᵢ = utility function for criterion i, mapping raw score xᵢ to [0,1]",fa:"uᵢ = دالة المنفعة للمعيار i، تحوّل الدرجة الخام xᵢ إلى قيمة [0,1]",
+xe:"Delivery delay = 3 days, utility function yields u(3) = 0.70 — meaning 70% satisfaction.",xa:"تأخير التسليم = 3 أيام، دالة المنفعة تعطي u(3) = 0.70 — أي رضا بنسبة 70%.",
+ge:["Captures non-linear human preferences (e.g., diminishing returns)","Grounded in established decision science theory","Can model decision-maker risk attitudes"],ga:["تلتقط التفضيلات البشرية غير الخطية","مؤسسة على نظرية علم القرار الراسخة","يمكنها نمذجة مواقف صانع القرار تجاه المخاطر"],
+be:["Eliciting accurate utility functions is time-consuming","Assumes utility independence between criteria","Calibration requires significant expert involvement"],ba:["استخلاص دوال المنفعة الدقيقة يستغرق وقتاً","تفترض استقلالية المنفعة بين المعايير","المعايرة تتطلب مشاركة كبيرة من الخبراء"],
+svg:`<svg viewBox="0 0 440 175" style="width:100%;max-height:175px"><text x="220" y="14" text-anchor="middle" font-size="9" fill="#5d6d7e" font-style="italic">Figure 5: MAUT — Utility function (concave) vs. linear</text><line x1="80" y1="140" x2="360" y2="140" stroke="#bdc3c7" stroke-width="0.8"/><line x1="80" y1="140" x2="80" y2="28" stroke="#bdc3c7" stroke-width="0.8"/><text x="220" y="160" text-anchor="middle" font-size="8" fill="#7f8c8d">Raw Performance Score →</text><text x="35" y="84" text-anchor="middle" font-size="8" fill="#7f8c8d" transform="rotate(-90,35,84)">Utility u(x) →</text><line x1="80" y1="140" x2="360" y2="28" stroke="#bdc3c7" stroke-width="1.2" stroke-dasharray="5,4"/><text x="345" y="38" font-size="7" fill="#bdc3c7">Linear</text><path d="M80,140 C120,60 200,42 360,30" fill="none" stroke="#b9770e" stroke-width="2"/><text x="260" y="52" font-size="7" fill="#b9770e" font-weight="600">Diminishing returns (concave)</text><text x="260" y="62" font-size="6.5" fill="#b9770e" font-family="Tahoma,sans-serif">تناقص العوائد (مقعّر)</text><circle cx="108" cy="90" r="3.5" fill="#b9770e"/><line x1="108" y1="90" x2="143" y2="75" stroke="#b9770e" stroke-width="0.6"/><text x="145" y="73" font-size="7" fill="#b9770e">Large utility gain</text><text x="145" y="82" font-size="6.5" fill="#b9770e" font-family="Tahoma,sans-serif">مكسب منفعة كبير</text><circle cx="304" cy="35" r="3.5" fill="#b9770e" opacity="0.6"/><text x="270" y="26" font-size="7" fill="#b9770e" opacity="0.7">Small gain</text></svg>`},
+{id:"DEA",num:"6",ne:"DEA — Data Envelopment Analysis",na:"DEA — تحليل مغلف البيانات",c:"#1a6e7e",
+ae:"Compare the fuel efficiency of cars. Car A uses 5 liters per 100km; Car B uses 8 liters. Car A is more efficient — it produces more output (distance) with less input (fuel). DEA applies this logic to bidders: it measures who achieves the most outputs (quality, delivery speed) relative to their inputs (cost, resources). Efficient bidders score 100%; others score lower, and DEA identifies exactly how much improvement is needed.",
+aa:"قارن كفاءة استهلاك الوقود بين السيارات. السيارة أ تستخدم 5 لترات لكل 100 كم؛ السيارة ب تستخدم 8 لترات. السيارة أ أكثر كفاءة. تطبّق DEA هذا المنطق على مقدمي العطاءات: تقيس من يحقق أكبر مخرجات (الجودة، سرعة التسليم) نسبةً إلى مدخلاته (التكلفة، الموارد). المقدمون الأكفاء يحصلون على 100%؛ الآخرون أقل، وتحدد DEA بالضبط مقدار التحسين المطلوب.",
+he:["Classify decision variables into Inputs (resources) and Outputs (results).","For each bidder, use linear programming to maximize its efficiency ratio.","Bidders with efficiency = 1.0 form the efficient frontier (benchmarks).","Bidders below 1.0 are inefficient — DEA quantifies the gap."],
+ha:["صنّف متغيرات القرار إلى مدخلات (موارد) ومخرجات (نتائج).","لكل مقدم عطاء، استخدم البرمجة الخطية لتعظيم نسبة كفاءته.","مقدمو العطاءات بكفاءة 1.0 يشكّلون حد الكفاءة (المعايير المرجعية).","المقدمون بدرجة أقل من 1.0 غير أكفاء — تحدد DEA الفجوة."],
+f:"Efficiency = Σ uᵣ yᵣₖ / Σ vᵢ xᵢₖ ≤ 1.0",fe:"u, v = output/input weights (optimized per unit), y = outputs, x = inputs",fa:"u, v = أوزان المخرجات/المدخلات (محسّنة لكل وحدة)، y = المخرجات، x = المدخلات",
+xe:"A bidder spending $100K delivering 95% quality and 98% on-time → high efficiency.",xa:"مقدم عطاء ينفق 100 ألف دولار ويقدم جودة 95% وتسليم في الوقت 98% ← كفاءة عالية.",
+ge:["Weights derived mathematically — no subjective assignment","Identifies specific improvement targets","Naturally handles multiple inputs and outputs"],ga:["الأوزان تُستخلص رياضياً — لا حاجة لتحديد ذاتي","تحدد أهداف تحسين محددة","تتعامل بشكل طبيعي مع مدخلات ومخرجات متعددة"],
+be:["Highly sensitive to measurement errors and outliers","Results are relative, not absolute rankings","Requires clear input/output classification"],ba:["حساسة جداً لأخطاء القياس والقيم الشاذة","النتائج نسبية وليست ترتيباً مطلقاً","تتطلب تصنيفاً واضحاً للمدخلات مقابل المخرجات"],
+svg:`<svg viewBox="0 0 440 175" style="width:100%;max-height:175px"><text x="220" y="14" text-anchor="middle" font-size="9" fill="#5d6d7e" font-style="italic">Figure 6: DEA — Efficiency frontier</text><line x1="55" y1="150" x2="400" y2="150" stroke="#bdc3c7" stroke-width="0.8"/><line x1="55" y1="150" x2="55" y2="22" stroke="#bdc3c7" stroke-width="0.8"/><text x="228" y="167" text-anchor="middle" font-size="8" fill="#7f8c8d">Input (Cost) →</text><text x="18" y="86" text-anchor="middle" font-size="8" fill="#7f8c8d" transform="rotate(-90,18,86)">Output (Quality) →</text><path d="M95,110 C130,40 250,25 370,40" fill="none" stroke="#1a6e7e" stroke-width="2" opacity="0.65"/><text x="340" y="27" font-size="7.5" fill="#1a6e7e" font-weight="600">Efficiency Frontier / حد الكفاءة</text><circle cx="105" cy="100" r="13" fill="#1a6e7e" opacity="0.8"/><text x="105" y="103" text-anchor="middle" font-size="9" fill="white" font-weight="600">A</text><text x="105" y="82" text-anchor="middle" font-size="7" fill="#1a6e7e" font-weight="600">θ=1.00</text><circle cx="200" cy="32" r="13" fill="#1a6e7e" opacity="0.8"/><text x="200" y="35" text-anchor="middle" font-size="9" fill="white" font-weight="600">B</text><text x="200" y="14" text-anchor="middle" font-size="7" fill="#1a6e7e" font-weight="600">θ=1.00</text><circle cx="340" cy="40" r="13" fill="#1a6e7e" opacity="0.8"/><text x="340" y="43" text-anchor="middle" font-size="9" fill="white" font-weight="600">C</text><circle cx="185" cy="80" r="13" fill="#95a5a6" opacity="0.45"/><text x="185" y="83" text-anchor="middle" font-size="9" fill="white" font-weight="600">D</text><line x1="185" y1="67" x2="185" y2="52" stroke="#922b21" stroke-dasharray="3,2" stroke-width="0.8"/><text x="201" y="57" font-size="7" fill="#922b21">θ&lt;1.00</text><circle cx="280" cy="85" r="13" fill="#95a5a6" opacity="0.45"/><text x="280" y="88" text-anchor="middle" font-size="9" fill="white" font-weight="600">E</text><line x1="280" y1="72" x2="280" y2="57" stroke="#922b21" stroke-dasharray="3,2" stroke-width="0.8"/><text x="296" y="62" font-size="7" fill="#922b21">θ&lt;1.00</text></svg>`}
+];
+
+const K=[
+{id:"transparency",ic:"1",ne:"Transparency",na:"الشفافية",qe:"How easily can a rejected bidder trace and understand the mathematical logic behind the ranking decision?",qa:"ما مدى سهولة تتبع وفهم مقدم العطاء المرفوض للمنطق الرياضي وراء قرار الترتيب؟",he:"Consider: Can a non-technical auditor follow the calculations?",ha:"فكّر: هل يستطيع مدقق غير تقني تتبع الحسابات؟"},
+{id:"pp_compliance",ic:"2",ne:"Compliance with Public Tendering Laws",na:"الامتثال لقوانين المناقصات العامة",qe:"How well does this method align with Oman's procurement regulations regarding fairness, accountability, and auditability?",qa:"ما مدى توافق هذه الطريقة مع أنظمة المشتريات العامة في عُمان فيما يخص العدالة والمساءلة وقابلية التدقيق؟",he:"Consider: audit trail, equal treatment, documentation.",ha:"فكّر: سجل التدقيق، المعاملة المتساوية، التوثيق."},
+{id:"ease_of_use",ic:"3",ne:"Ease of Use",na:"سهولة الاستخدام",qe:"Can a procurement officer with standard qualifications apply this method daily without specialized data science support?",qa:"هل يستطيع موظف مشتريات بمؤهلات عادية تطبيق هذه الطريقة يومياً دون دعم متخصص في علم البيانات؟",he:"Consider: learning curve, software, training.",ha:"فكّر: منحنى التعلم، البرمجيات، التدريب."},
+{id:"comp_burden",ic:"4",ne:"Computational Complexity",na:"التعقيد الحسابي",qe:"How light is the computational effort? (10 = very light/fast, 1 = very heavy/resource-intensive)",qa:"ما مدى خفة التعقيد الحسابي؟ (10 = خفيف وسريع جداً، 1 = ثقيل جداً ويستهلك موارد كبيرة)",he:"Can it run in Excel, or needs specialized software?",ha:"هل يمكن تشغيلها في إكسل أم تتطلب برامج متخصصة؟"},
+{id:"info_loss",ic:"5",ne:"Information Loss",na:"فقدان المعلومات",qe:"How well does the method preserve data richness? (10 = preserves all detail, 1 = significant loss)",qa:"ما مدى حفاظ الطريقة على غنى البيانات؟ (10 = تحافظ على كل التفاصيل، 1 = فقدان كبير)",he:"Does aggregation strip meaningful qualitative distinctions?",ha:"هل يؤدي التجميع إلى إزالة فروقات نوعية ذات معنى؟"}
+];
+
+const SC=[
+{v:1,en:"Very Poor",ar:"ضعيف جداً",c:"#922b21"},{v:2,en:"Poor",ar:"ضعيف",c:"#a93226"},
+{v:3,en:"Below Avg.",ar:"أقل من المتوسط",c:"#b9770e"},{v:4,en:"Slightly Below",ar:"أقل بقليل",c:"#b7950b"},
+{v:5,en:"Average",ar:"متوسط",c:"#7d8a6e"},{v:6,en:"Slightly Above",ar:"أعلى بقليل",c:"#5d8a6e"},
+{v:7,en:"Above Avg.",ar:"أعلى من المتوسط",c:"#1e8449"},{v:8,en:"Good",ar:"جيد",c:"#148f77"},
+{v:9,en:"Very Good",ar:"جيد جداً",c:"#1a6e7e"},{v:10,en:"Excellent",ar:"ممتاز",c:"#1a5276"}
+];
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let S={phase:"intro",info:{name:"",role:"",experience:"",sector:""},weights:{transparency:20,pp_compliance:20,ease_of_use:20,comp_burden:20,info_loss:20},scores:{},openMethod:null,comments:"",ranking:["","","","","",""]};
+M.forEach(m=>{S.scores[m.id]={};K.forEach(k=>{S.scores[m.id][k.id]=0;});});
+
+function setS(u){Object.assign(S,u);render();}
+function setScore(mid,kid,v){S.scores[mid][kid]=v;render();}
+function calcTotals(){return M.map(m=>{const t=K.reduce((s,k)=>s+(S.scores[m.id][k.id]||0)*(S.weights[k.id]/100),0);return{...m,total:t};}).sort((a,b)=>b.total-a.total);}
+
+// ══════════════════════════════════════════════
+// RENDER HELPERS
+// ══════════════════════════════════════════════
+function prog(step,total){return`<div class="prog"><span class="prog-text">Section ${step} of ${total} | القسم ${step} من ${total}</span><div class="prog-track"><div class="prog-fill" style="width:${(step/total)*100}%"></div></div></div>`;}
+
+function ratingBtns(mid,kid){
+  return`<div class="rbtns">${SC.map(s=>{const a=S.scores[mid][kid]===s.v;return`<button class="rbtn${a?' active':''}" style="--rc:${s.c};${a?`border-color:${s.c};background:${s.c}12`:''}" onclick="setScore('${mid}','${kid}',${s.v})"><span class="rbtn-num">${s.v}</span><span class="rbtn-lbl">${s.en}</span><span class="rbtn-lbl" style="font-family:Tahoma,sans-serif">${s.ar}</span></button>`;}).join('')}</div>`;
+}
+
+function methodHTML(m){
+  const open=S.openMethod===m.id;
+  return`<div class="mc${open?' open':''}" style="--mc:${m.c}">
+    <button class="mc-hdr" onclick="setS({openMethod:S.openMethod==='${m.id}'?null:'${m.id}'})">
+      <span class="num" style="background:${m.c}">${m.num}</span>
+      <div style="flex:1"><div class="mc-name">${m.ne}</div><div class="mc-name-ar">${m.na}</div></div>
+      <span class="mc-arrow">▾</span>
+    </button>
+    <div class="mc-body">
+      <div class="analogy" style="border-color:${m.c}">
+        <div class="analogy-tag sf" style="color:${m.c}">Conceptual Overview / نظرة عامة على المفهوم</div>
+        <p class="pen">${m.ae}</p><p class="par">${m.aa}</p>
+      </div>
+      <div class="vis">${m.svg}</div>
+      <div style="margin-bottom:18px">
+        <div class="steps-tag sf">Methodology Steps / خطوات المنهجية</div>
+        ${m.he.map((s,i)=>`<div class="step"><span class="num" style="background:${m.c};width:20px;height:20px;font-size:10px;line-height:20px;margin-top:3px">${i+1}</span><div style="flex:1"><div class="step-en">${s}</div><div class="step-ar">${m.ha[i]}</div></div></div>`).join('')}
+      </div>
+      <div class="formula-box"><div class="formula-tag sf">Mathematical Formulation / الصياغة الرياضية</div><code class="formula-code">${m.f}</code><div class="formula-ex">${m.fe}</div><div class="formula-ex ar">${m.fa}</div></div>
+      <div class="ex-box"><div class="ex-tag sf">Worked Example / مثال تطبيقي</div><div style="font-size:12px;color:#6e4e15;line-height:1.5">${m.xe}</div><div class="ar" style="font-size:12px;color:#8a6a2e;line-height:1.6;margin-top:4px">${m.xa}</div></div>
+      <div class="sw-grid">
+        <div class="sw-col sw-s"><div class="sw-tag sw-tag-s sf">Strengths / نقاط القوة</div>${m.ge.map((g,i)=>`<div class="sw-item"><div class="sw-en-s">• ${g}</div><div class="sw-ar-s">• ${m.ga[i]}</div></div>`).join('')}</div>
+        <div class="sw-col sw-w"><div class="sw-tag sw-tag-w sf">Weaknesses / نقاط الضعف</div>${m.be.map((b,i)=>`<div class="sw-item"><div class="sw-en-w">• ${b}</div><div class="sw-ar-w">• ${m.ba[i]}</div></div>`).join('')}</div>
+      </div>
+      <div class="rate-sec">
+        <div class="rate-title" style="color:${m.c}">Expert Assessment: ${m.id}</div>
+        <div class="rate-sub">Please rate this method on each KPI (1–10). / يرجى تقييم هذه الطريقة على كل مؤشر أداء (1–10).</div>
+        ${K.map(k=>`<div class="kpi-block">
+          <div class="kpi-hdr"><span class="num num-sm">${k.ic}</span><span class="kpi-name">${k.ne}</span><span class="kpi-name-ar">/ ${k.na}</span></div>
+          <div class="kpi-q">${k.qe}</div><div class="kpi-q-ar">${k.qa}</div>
+          <div class="kpi-h">${k.he}</div><div class="kpi-h-ar">${k.ha}</div>
+          ${ratingBtns(m.id,k.id)}
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════
+// MAIN RENDER
+// ══════════════════════════════════════════════
+function render(){
+  const app=document.getElementById("app");
+  let h="";
+
+  if(S.phase==="intro"){
+    h=`<div class="card">
+      <h2>Introduction &amp; Research Context</h2><div class="h2ar">مقدمة وسياق البحث</div>
+      <p class="pen">Dear Expert, this survey is part of a Master's thesis investigating the suitability of Multi-Criteria Decision-Making (MCDM) methods for the <strong>bid ranking stage</strong> in Oman's public procurement process.</p>
+      <p class="par">عزيزي الخبير، هذا الاستبيان جزء من رسالة ماجستير تبحث في مدى ملاءمة أساليب اتخاذ القرار متعدد المعايير (MCDM) <strong>لمرحلة ترتيب العطاءات</strong> في عملية المشتريات العامة في سلطنة عُمان.</p>
+      <div class="ctx ctx-accent">
+        <div class="ctx-title sf" style="color:#2c3e50">What is the Bid Ranking Stage? / ما هي مرحلة ترتيب العطاءات؟</div>
+        <p class="pen" style="margin-bottom:6px">In public procurement, after bids are received and checked for compliance, the <strong>ranking stage</strong> determines which bidder offers the best overall value. The evaluation committee must weigh multiple criteria — such as price, technical quality, delivery timeline, and past performance — and produce a defensible, transparent ranking. This is where MCDM methods provide structured mathematical approaches to replace or support subjective judgment.</p>
+        <p class="par" style="margin-bottom:0">في المشتريات العامة، بعد استلام العطاءات والتحقق من استيفائها للشروط، تحدد <strong>مرحلة الترتيب</strong> أي مقدم عطاء يقدم أفضل قيمة إجمالية. يجب على لجنة التقييم وزن معايير متعددة — مثل السعر والجودة الفنية والجدول الزمني للتسليم والأداء السابق — وإنتاج ترتيب قابل للدفاع عنه وشفاف. هنا تقدم أساليب MCDM مناهج رياضية منظمة لتحل محل أو تدعم الحكم الشخصي.</p>
+      </div>
+      <div class="ctx">
+        <div class="ctx-title sf">What is MCDM? / ما هو اتخاذ القرار متعدد المعايير؟</div>
+        <p class="pen" style="margin-bottom:6px">Multi-Criteria Decision-Making (MCDM) is a family of mathematical frameworks that help decision-makers evaluate and rank alternatives when multiple — often conflicting — criteria must be considered simultaneously. Instead of relying on intuition alone, these methods provide structured, auditable, and reproducible processes for comparing options.</p>
+        <p class="par" style="margin-bottom:0">اتخاذ القرار متعدد المعايير (MCDM) هو مجموعة من الأطر الرياضية التي تساعد صانعي القرار في تقييم وترتيب البدائل عندما يجب مراعاة معايير متعددة — وغالباً متعارضة — في آن واحد. بدلاً من الاعتماد على الحدس وحده، توفر هذه الأساليب عمليات منظمة وقابلة للتدقيق والتكرار.</p>
+      </div>
+      <p class="pen" style="margin-bottom:4px">You will be presented with six MCDM methods. For each, you will receive a conceptual explanation, a visual diagram, the mathematical formulation, and a worked example. You are then asked to rate each method on five Key Performance Indicators.</p>
+      <p class="par" style="margin-bottom:16px">سيتم عرض ستة أساليب MCDM عليك. لكل أسلوب، ستتلقى شرحاً مفاهيمياً ورسماً بيانياً توضيحياً والصياغة الرياضية ومثالاً تطبيقياً. ثم يُطلب منك تقييم كل أسلوب على خمسة مؤشرات أداء رئيسية.</p>
+      <div class="ctx-title sf" style="margin-bottom:8px">Participant Information / بيانات المشارك</div>
+      <div style="margin-bottom:10px"><label class="lbl">Full Name / الاسم الكامل</label><input class="inp" type="text" id="f_name" value="${S.info.name}" placeholder="Dr. / Eng. / Mr. / Ms." onchange="S.info.name=this.value"></div>
+      <div style="margin-bottom:10px"><label class="lbl">Position &amp; Organisation / المسمى الوظيفي والجهة</label><input class="inp" type="text" id="f_role" value="${S.info.role}" placeholder="e.g., Procurement Director, Tender Board" onchange="S.info.role=this.value"></div>
+      <div class="grid2" style="margin-bottom:18px">
+        <div><label class="lbl">Years of Procurement Experience / سنوات الخبرة</label><input class="inp" type="number" id="f_exp" value="${S.info.experience}" placeholder="15" onchange="S.info.experience=this.value"></div>
+        <div><label class="lbl">Sector / القطاع</label><input class="inp" type="text" id="f_sec" value="${S.info.sector}" placeholder="Government / حكومي" onchange="S.info.sector=this.value"></div>
+      </div>
+      <button class="btn-p btn-full" onclick="goWeights()">Proceed to Section 1 / الانتقال إلى القسم 1 →</button>
+    </div>`;
+  }
+  else if(S.phase==="weights"){
+    const tw=Object.values(S.weights).reduce((a,b)=>a+b,0);const ok=Math.abs(tw-100)<0.5;
+    h=`<div class="card">${prog(1,3)}
+      <h2>Section 1: KPI Weight Assignment</h2><div class="h2ar">القسم 1: تحديد أوزان مؤشرات الأداء</div>
+      <p class="pen">Please distribute exactly 100 points across the five KPIs to reflect their relative importance in your procurement context.</p>
+      <p class="par" style="margin-bottom:14px">يرجى توزيع 100 نقطة بالضبط على المؤشرات الخمسة لتعكس أهميتها النسبية في سياقك.</p>
+      <div class="wt-box ${ok?'wt-ok':'wt-bad'}">
+        ${K.map(k=>`<div class="wt-item"><span class="num num-sm">${k.ic}</span><div style="flex:1"><div style="font-size:12px;font-weight:600;color:#2c3e50">${k.ne}</div><div style="font-size:11px;color:#7f8c8d;font-family:Tahoma,sans-serif">${k.na}</div></div><input class="inp-num" type="number" min="0" max="100" value="${S.weights[k.id]}" onchange="S.weights['${k.id}']=parseInt(this.value)||0;render()"><span style="font-size:12px;color:#95a5a6;font-weight:600" class="sf">%</span></div>`).join('')}
+        <div class="wt-total" style="color:${ok?'#1e8449':'#922b21'}">Total: ${tw}% ${ok?'✓ Valid':'— Must equal 100%'}</div>
+      </div>
+      <div class="btn-row"><button class="btn-s" onclick="setS({phase:'intro'})">← Back</button><button class="btn-p" style="flex:1" ${ok?'':'disabled'} onclick="setS({phase:'methods',openMethod:'SAW'})">Proceed to Section 2 →</button></div>
+    </div>`;
+  }
+  else if(S.phase==="methods"){
+    h=`<div class="card" style="margin-bottom:12px">${prog(2,3)}
+      <h2>Section 2: Method Evaluation</h2><div class="h2ar">القسم 2: تقييم الأساليب</div>
+      <p class="pen" style="margin-bottom:0">Expand each method. Study the explanation, diagram, formula, and example. Then rate on each KPI (1–10).</p>
+    </div>`;
+    M.forEach(m=>{h+=methodHTML(m);});
+    h+=`<div class="btn-row" style="margin:12px 0 20px"><button class="btn-s" onclick="setS({phase:'weights'})">← Section 1</button><button class="btn-p" style="flex:1" onclick="setS({phase:'review'})">Proceed to Review →</button></div>`;
+  }
+  else if(S.phase==="review"){
+    const mt=calcTotals();const allR=M.every(m=>K.every(k=>S.scores[m.id][k.id]>0));const mx=mt[0]?mt[0].total:1;
+    h=`<div class="card">${prog(3,3)}
+      <h2>Section 3: Review &amp; Submission</h2><div class="h2ar">القسم 3: المراجعة والإرسال</div>
+      <div style="overflow-x:auto;margin-bottom:16px"><table class="rtable">
+        <thead><tr><th style="text-align:left">Method</th>${K.map(k=>`<th style="text-align:center;font-size:9px">${k.ne.split(' ')[0]}</th>`).join('')}<th style="text-align:center;font-weight:800;border-left:2px solid #2c3e50">Weighted Total</th></tr></thead>
+        <tbody>${mt.map((m,i)=>`<tr style="background:${i===0?'#eafaf1':'transparent'}"><td style="font-weight:700;color:${m.c}">${i===0?'→ ':''}${m.id}</td>${K.map(k=>`<td style="text-align:center;color:${S.scores[m.id][k.id]===0?'#922b21':'#34495e'}">${S.scores[m.id][k.id]===0?'—':S.scores[m.id][k.id]}</td>`).join('')}<td style="text-align:center;font-weight:800;border-left:2px solid #e5e0da">${m.total.toFixed(2)}</td></tr>`).join('')}</tbody>
+      </table></div>
+      <div style="margin-bottom:16px"><div class="ctx-title sf" style="margin-bottom:6px">Weighted Score Distribution</div>${mt.map(m=>`<div class="bar-row"><span class="bar-lbl" style="color:${m.c}">${m.id}</span><div class="bar-track"><div class="bar-fill" style="width:${(m.total/mx)*100}%;background:${m.c};opacity:0.7"><span class="bar-val">${m.total.toFixed(2)}</span></div></div></div>`).join('')}</div>
+      ${!allR?`<div class="warn"><div class="warn-en">⚠ Incomplete ratings. Please return to Section 2.</div><div class="warn-ar">⚠ تقييمات غير مكتملة. يرجى العودة إلى القسم 2.</div></div>`:''}
+      <div class="ctx" style="margin-bottom:14px">
+        <div class="ctx-title sf" style="color:#2c3e50">Overall Implementation Ranking (Optional) / ترتيب التطبيق العام (اختياري)</div>
+        <p style="font-size:10px;color:#7f8c8d;margin-bottom:8px" class="sf">Rank 1st (most suitable) to 6th (least suitable) for Oman's bid ranking stage.</p>
+        <div class="rank-grid">${[1,2,3,4,5,6].map(p=>`<div><div class="rank-pos">#${p}</div><select class="rank-sel" onchange="S.ranking[${p-1}]=this.value"><option value="">—</option>${M.map(m=>`<option value="${m.id}"${S.ranking[p-1]===m.id?' selected':''}>${m.id}</option>`).join('')}</select></div>`).join('')}</div>
+      </div>
+      <div style="margin-bottom:16px"><label class="lbl">Additional Comments / ملاحظات إضافية (Optional)</label><textarea class="inp" id="f_cmt" placeholder="Any observations or recommendations..." onchange="S.comments=this.value">${S.comments}</textarea></div>
+      <div class="btn-row"><button class="btn-s" onclick="setS({phase:'methods'})">← Edit Ratings</button><button class="btn-p btn-g" style="flex:1" onclick="downloadCSV()">✓ Download Response (CSV)</button></div>
+    </div>`;
+  }
+  else if(S.phase==="done"){
+    h=`<div class="card done">
+      <div class="done-icon">✓</div>
+      <h2 style="color:#1e8449">Thank You for Your Contribution</h2><div class="h2ar" style="color:#27ae60;margin-bottom:10px">شكراً لمساهمتك</div>
+      <p class="pen" style="margin-bottom:14px">Your response has been downloaded as a CSV file. Please send it to the researcher at the provided contact address.</p>
+      <p class="par" style="margin-bottom:16px">تم تحميل استجابتك كملف CSV. يرجى إرساله إلى الباحث على عنوان الاتصال المقدم.</p>
+      <button class="btn-s" onclick="downloadCSV()" style="margin-bottom:10px">Download Again</button><br>
+      <button style="font-size:10px;color:#95a5a6;background:none;border:none;text-decoration:underline;cursor:pointer" onclick="resetAll()">New Response</button>
+    </div>`;
+  }
+  app.innerHTML=h;
+}
+
+function goWeights(){
+  S.info.name=document.getElementById('f_name')?.value||S.info.name;
+  S.info.role=document.getElementById('f_role')?.value||S.info.role;
+  S.info.experience=document.getElementById('f_exp')?.value||S.info.experience;
+  S.info.sector=document.getElementById('f_sec')?.value||S.info.sector;
+  if(S.info.name)setS({phase:'weights'});
+}
+
+function downloadCSV(){
+  const mt=calcTotals();
+  let c="\uFEFF"+"MCDM Expert Survey Response — Bid Ranking Stage — Oman\n";
+  c+="استجابة استبيان خبراء MCDM — مرحلة ترتيب العطاءات — عُمان\n\n";
+  c+=`Expert,${S.info.name}\nRole,${S.info.role}\nExperience,${S.info.experience}\nSector,${S.info.sector}\n\n`;
+  c+="KPI Weights\nKPI,Weight(%)\n";K.forEach(k=>{c+=`${k.ne},${S.weights[k.id]}\n`;});
+  c+="\nRaw Ratings (1-10)\nMethod,"+K.map(k=>k.ne).join(",")+"\n";
+  M.forEach(m=>{c+=m.id+","+K.map(k=>S.scores[m.id][k.id]).join(",")+"\n";});
+  c+="\nWeighted Scores\nMethod,Total,Rank\n";mt.forEach((m,i)=>{c+=`${m.id},${m.total.toFixed(3)},${i+1}\n`;});
+  c+=`\nFinal Ranking,${S.ranking.filter(Boolean).join(" > ")}\n`;
+  c+=`\nComments,"${S.comments.replace(/"/g,'""')}"\n`;
+  const b=new Blob([c],{type:"text/csv;charset=utf-8"});const u=URL.createObjectURL(b);
+  const a=document.createElement("a");a.href=u;a.download=`MCDM_Survey_${S.info.name.replace(/\s+/g,"_")||"response"}.csv`;a.click();URL.revokeObjectURL(u);
+  setS({phase:"done"});
+}
+
+function resetAll(){
+  S={phase:"intro",info:{name:"",role:"",experience:"",sector:""},weights:{transparency:20,pp_compliance:20,ease_of_use:20,comp_burden:20,info_loss:20},scores:{},openMethod:null,comments:"",ranking:["","","","","",""]};
+  M.forEach(m=>{S.scores[m.id]={};K.forEach(k=>{S.scores[m.id][k.id]=0;});});render();
+}
+
+render();
+</script>
+</body>
+</html>
